@@ -1,9 +1,9 @@
 <template>
 	<nav class="flex sticky top-0 z-10 bg-white shadow-md p-4">
 		<div class="flex w-1/4">
-			<a href="#" class="text-fb-blue mr-4">
+			<router-link to="/" class="text-fb-blue mr-4">
 				<i class="fab fa-facebook text-5xl"></i>
-			</a>
+			</router-link>
 			<div class="flex items-center bg-gray-200 rounded-full px-4 py-2">
 				<i class="fas fa-search text-fb-gray mr-2"></i>
 				<input type="text" placeholder="Search Facebook" class="bg-transparent focus:outline-none">
@@ -27,9 +27,13 @@
 			</a>
 		</div>
 		<div class="flex justify-end items-center w-1/4">
-			<div class="flex items-center">
-				<img src="/images/avatar2.jpg" alt="" class="w-12 rounded-full mr-4">
-				<span class="font-bold">Ludde</span>
+			<div class="flex items-center" v-if="user">
+				<!-- <img :src="user.photoURL" alt="" class="w-12 rounded-full mr-4"> -->
+				<avatar :src="user.photoURL"></avatar>
+				<span class="font-bold">{{ user.displayName }}</span>
+			</div>
+			<div v-else>
+				<router-link to="/login">Login</router-link>
 			</div>
 			<div class="text-fb-gray">
 				<a href="#" class="px-4">
@@ -48,3 +52,11 @@
 		</div>
 	</nav>
 </template>
+
+<script>
+	import { mapState } from "vuex"
+
+	export default {
+		computed: mapState("auth", ["user"])
+	}
+</script>

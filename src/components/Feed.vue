@@ -5,15 +5,17 @@
 			<story v-for="story in stories" :key="story.id" :story="story"></story>
 		</div>
 		<message-sender></message-sender>
+		<post></post>
 	</div>
 </template>
 
 <script>
 	import Story from "./Story"
 	import MessageSender from "./MessageSender"
+	import Post from "./Post"
 
 	export default {
-		components: { Story, MessageSender },
+		components: { Story, MessageSender, Post },
 		data() {
 			return {
 				stories: [
